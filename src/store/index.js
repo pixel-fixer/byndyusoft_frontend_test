@@ -6,6 +6,24 @@ Vue.use(Vuex)
 
 const debug = process.env.NODE_ENV !== 'production'
  
+let setNestedArray = function(arr, parent){
+    var out = []
+    var arr = Object.assign({},arr)
+    
+    for(var i in arr) {
+        if(arr[i].parent_id == parent) {
+            var children = setNestedArray(arr, arr[i].id)
+
+            if(children.length) {
+                arr[i].children = children
+            }
+            out.push(arr[i])
+        }
+    }
+
+    return out
+}
+
 const state = {
     comments: [
         {
@@ -59,10 +77,8 @@ const state = {
 export default new Vuex.Store({
     state,
     getters: {
-        mappedComments: state => {
-                 return state.comments.map( item => {
-                return item
-            })
+        nestedTreeComments: state => {
+            return setNestedArray(state.comments, 0)
         }
     },
     mutations: {
@@ -71,11 +87,21 @@ export default new Vuex.Store({
             if(el){
                 el.rating = action == 'add' ? el.rating + 1 : el.rating - 1
             }
+        },
+        addComment(state, comment){
+            console.log(state.comments)
+            comment.id = this.state.comments.length++
+            comment.rating = 0
+            comment.avatar = 'https://placeimg.com/64/64/people'
+            comment.date = moment()
+            state.comments.push(comment)
         }
     },
     actions:{
-        addComment({commit}) {
-
-        }
+        /*addComment({commit}, comment) {
+ 
+            console.log('addComment')
+            commit('ADD_NEW_COMMENT', comment)
+        }*/
     }
 })

@@ -2,8 +2,8 @@
     <div class="comments content">
         <h2>Комментарии</h2>
         <div class="comment__list">
-            <comment v-for="comment in nestedComments" :comment="comment" :depth="0"></comment>
-            <add-comment-form v-if="showForm"></add-comment-form>
+            <comment v-for="comment in nestedTreeComments" :comment="comment" :depth="0" :key="comment.id"></comment>
+            <add-comment-form v-if="showForm" :parent-id="0"></add-comment-form>
         </div>
     </div>
 </template>
@@ -24,27 +24,17 @@ export default {
         Comment,
         AddCommentForm
     },
-    computed: {
-        ...mapGetters(['mappedComments']),
-        nestedComments(){
-            return this.getTreeComments(this.$store.state.comments, 0)
+    watch: {
+        '$store.state.comments': function(){
+            console.log('watch $store.state.comments')
         }
     },
+    computed: {
+        ...mapGetters(['nestedTreeComments']),
+   
+    },
     methods: {
-        getTreeComments(arr, parent){
-            var out = []
-            for(var i in arr) {
-                if(arr[i].parent_id == parent) {
-                    var children = this.getTreeComments(arr, arr[i].id)
-
-                    if(children.length) {
-                        arr[i].children = children
-                    }
-                    out.push(arr[i])
-                }
-            }
-            return out
-        }
+        
     }
 }
 </script>

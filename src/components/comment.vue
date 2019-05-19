@@ -22,7 +22,7 @@
                     <div class="comments__item__text">{{comment.text}}</div>
                 </div>
             </div>
-            <add-comment-form v-if="showForm"></add-comment-form>
+            <add-comment-form v-if="showForm" :parent-id="comment.id"></add-comment-form>
         </template>
         <div  v-else @click.prevent="userWhantToShowComment = true"><a href=""> Открыть комментарий</a></div>
         <div class="comments__item__children__wrap" v-if="comment.children">
@@ -32,7 +32,7 @@
             <div class="comments__item__children"
                 :class="{'ml-20': depth <= 2}"
                 v-if="showChildren">
-                <comment v-for="comment in comment.children" :comment="comment" :depth="depth + 1"></comment>
+                <comment v-for="c in comment.children" :comment="c" :depth="depth + 1" :key="c.id"></comment>
             </div>
         </div>
     </div>
