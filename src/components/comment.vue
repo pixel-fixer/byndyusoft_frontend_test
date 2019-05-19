@@ -17,12 +17,12 @@
                         </div>
 
                         <div class="flex-push"></div>
-                        <a href="" @click.prevent="showForm = true">Ответить</a>
+                        <a href="" @click.prevent="openForm">Ответить</a>
                     </div>
                     <div class="comments__item__text" v-html="$options.filters.mdToHtml(comment.text)"></div>
                 </div>
             </div>
-            <add-comment-form v-if="showForm" :parent-id="comment.id"></add-comment-form>
+            <add-comment-form v-if="showForm" :parent-id="comment.id" ></add-comment-form>
         </template>
         <div  v-else @click.prevent="userWhantToShowComment = true"><a href=""> Открыть комментарий</a></div>
         <div class="comments__item__children__wrap" v-if="comment.children">
@@ -40,6 +40,7 @@
 
 <script>
 import AddCommentForm from './add_comment_form.vue'
+import EventBus from './../services/event-bus'
 
 export default {
     name: 'comment',
@@ -54,6 +55,11 @@ export default {
             showChildren: true
         }
     },
+    mounted () {
+         EventBus.$on('CLOSE_ALL_FORMS', () => {
+             this.showForm = false
+         });
+    },
     computed: {
         'showComment': function(){
             if( (this.comment.rating <= -10 && this.userWhantToShowComment == true )
@@ -67,6 +73,10 @@ export default {
     methods: {
         changeRaging(id, action){
             this.$store.commit('CHANGE_COMMENT_RATING', {id: id, action: action})
+        },
+        openForm(){
+            EventBus.$emit('CLOSE_ALL_FORMS');
+            this.showForm = true;
         }
     }
 }

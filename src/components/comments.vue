@@ -4,6 +4,7 @@
         <div class="comment__list">
             <comment v-for="comment in nestedTreeComments" :comment="comment" :depth="0" :key="comment.id"></comment>
             <add-comment-form v-if="showForm" :parent-id="0"></add-comment-form>
+            <a v-else href="" @click.prevent="openForm">Написать комментарий</a>
         </div>
     </div>
 </template>
@@ -12,6 +13,7 @@
 import Comment from './comment.vue'
 import { mapGetters } from 'vuex';
 import AddCommentForm from './add_comment_form.vue'
+import EventBus from './../services/event-bus'
 
 export default {
     name: 'comments',
@@ -24,6 +26,11 @@ export default {
         Comment,
         AddCommentForm
     },
+    mounted () {
+         EventBus.$on('CLOSE_ALL_FORMS', () => {
+            this.showForm = false
+         });
+    },
     watch: {
         '$store.state.comments': function(){
             console.log('watch $store.state.comments')
@@ -33,7 +40,10 @@ export default {
         ...mapGetters(['nestedTreeComments'])
     },
     methods: {
-        
+       openForm(){
+            EventBus.$emit('CLOSE_ALL_FORMS');
+            this.showForm = true;
+        }
     }
 }
 </script>

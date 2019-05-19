@@ -14,7 +14,7 @@ Vue.filter('formatDate', function(value) {
 })
 
 /**
- * Или можно использовать value.fromNow() c соответствующей локализацией
+ * Или можно использовать moment().fromNow() c соответствующей локализацией
  */
 Vue.filter('dateDiffFormat', function(value) {
   if (value) {
@@ -32,7 +32,6 @@ Vue.filter('dateDiffFormat', function(value) {
 Vue.filter('mdToHtml', function(value) {
   if (value) {
     let md = new Markdown()
-    console.log(md.parse(value));
     return md.parse(value)
   }
 })
