@@ -1,4 +1,5 @@
 class Markdown{
+    
     constructor() {
         this.rules = [
             {regex: /(#+)(.*)/g, replacement: header},                                         // headers
@@ -14,7 +15,6 @@ class Markdown{
             {regex: /\n-{5,}/g, replacement: '\n<hr />'},                                      // horizontal rule
             {regex: /\n([^\n]+)\n/g, replacement: para},                                       // add paragraphs
         ]
-
      
         function para(text, line) {
             const trimmed = line.trim();

@@ -12,7 +12,3 @@ export default {
     name: 'single-article'
 }
 </script>
-
-<style>
-
-</style>
