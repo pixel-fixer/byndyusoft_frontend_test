@@ -14,7 +14,7 @@ const state = {
             avatar: 'https://placeimg.com/64/64/people',
             name: 'Иван Иванович',
             date: moment().subtract(6, "days"), 
-            rating: 10,
+            rating: -2,
             text: 'текст комментария 1'
         },
         {
@@ -43,14 +43,16 @@ export default new Vuex.Store({
     getters: {
         mappedComments: state => {
             return state.comments.map( item => {
-                //item.date_diff =  moment(item.date).diff(new Date())
                 return item
             })
         }
     },
     mutations: {
-        ADD_COMMENT(state, comment) {
-            state.coments.push(comment)
+        CHANGE_COMMENT_RATING(state, {id, action}) {
+            let el = state.comments.find(el => el.id == id)
+            if(el){
+                el.rating = action == 'add' ? el.rating + 1 : el.rating - 1
+            }
         }
     },
     actions:{
