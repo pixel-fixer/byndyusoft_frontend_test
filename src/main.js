@@ -12,6 +12,22 @@ Vue.filter('formatDate', function(value) {
   }
 })
 
+/**
+ * Или можно использовать value.fromNow() c соответствующей локализацией
+ */
+Vue.filter('dateDiffFormat', function(value) {
+  if (value) {
+    let ms  = Math.abs( moment(value).diff(new Date()) )
+     if(ms <= 3600000){
+      return moment( value.diff(moment()) ).format('m') + ' минут назад'
+    }else if( ms <= 86400000){
+      return moment( value.diff(moment()) ).format('H') + ' часов назад'
+    }else{
+      return (moment( moment().diff(value)).format('D') - 1) + ' дней назад'
+    } 
+  }
+})
+
 Vue.config.productionTip = false
 
 new Vue({

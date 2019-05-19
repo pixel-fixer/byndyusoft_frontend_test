@@ -5,12 +5,12 @@
         </div>
         <div class="comments__item__content">
             <div class="comments__item__top-bar flex flex-center">
-                <div class="comments__item__name mr-20 no-wrap">Имя</div>
-                <div class="comments__item__date mr-20 no-wrap">час назад</div>
+                <div class="comments__item__name mr-20 no-wrap">{{ comment.name }}</div>
+                <div class="comments__item__date mr-20 no-wrap">{{ comment.date | dateDiffFormat }}</div>
                 
                 <div class="comments__item__vote flex">
                     <div class="comments__item__vote__action">+</div>
-                    <div class="comments__item__vote__rating">20</div>
+                    <div class="comments__item__vote__rating">{{comment.rating}}</div>
                     <div class="comments__item__vote__action">&mdash;</div>                        
                 </div>
 
@@ -26,7 +26,8 @@
 
 <script>
 export default {
-    name: 'comment'
+    name: 'comment',
+    props: ['comment']
 }
 </script>
 
