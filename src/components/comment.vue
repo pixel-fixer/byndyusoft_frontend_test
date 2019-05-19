@@ -1,39 +1,57 @@
 <template>
-    <div class="comments__item flex">
+    <div class="comments__item">
         <template v-if="showComment">
-            <div class="comments__item__avatar">
-                <img src="https://placeimg.com/64/64/people" alt="">
-            </div>
-            <div class="comments__item__content" >
-                <div class="comments__item__top-bar flex flex-center">
-                    <div class="comments__item__name mr-20 no-wrap">{{ comment.name }}</div>
-                    <div class="comments__item__date mr-20 no-wrap">{{ comment.date | dateDiffFormat }}</div>
-                    
-                    <div class="comments__item__vote flex">
-                        <div class="comments__item__vote__action" @click="changeRaging(comment.id, 'add')">+</div>
-                        <div class="comments__item__vote__rating" :class="{'bad': comment.rating < 0}">{{comment.rating}}</div>
-                        <div class="comments__item__vote__action" @click="changeRaging(comment.id, 'sub')">&mdash;</div>                        
-                    </div>
+            <div class="flex">
+                <div class="comments__item__avatar">
+                    <img src="https://placeimg.com/64/64/people" alt="">
+                </div>
+                <div class="comments__item__content" >
+                    <div class="comments__item__top-bar flex flex-center">
+                        <div class="comments__item__name mr-20 no-wrap">{{ comment.name }}</div>
+                        <div class="comments__item__date mr-20 no-wrap">{{ comment.date | dateDiffFormat }}</div>
+                        
+                        <div class="comments__item__vote flex">
+                            <div class="comments__item__vote__action" @click="changeRaging(comment.id, 'add')">+</div>
+                            <div class="comments__item__vote__rating" :class="{'bad': comment.rating < 0}">{{comment.rating}}</div>
+                            <div class="comments__item__vote__action" @click="changeRaging(comment.id, 'sub')">&mdash;</div>                        
+                        </div>
 
-                    <div class="flex-push"></div>
-                    <a href="">Ответить</a>
-                </div>
-                <div class="comments__item__text">
-                    Adipisicing ea laborum laboris qui dolore id deserunt Lorem fugiat. Nisi excepteur ullamco esse ut et excepteur velit sunt id enim occaecat dolore. Excepteur nisi sunt ut qui excepteur anim ea aliquip amet. Commodo eiusmod et cupidatat dolor aliqua. Incididunt proident aute voluptate sint. Enim et do voluptate amet amet in non cillum.
+                        <div class="flex-push"></div>
+                        <a href="" @click.prevent="showForm = true">Ответить</a>
+                    </div>
+                    <div class="comments__item__text">{{comment.text}}</div>
                 </div>
             </div>
+            <add-comment-form v-if="showForm"></add-comment-form>
         </template>
         <div  v-else @click.prevent="userWhantToShowComment = true"><a href=""> Открыть комментарий</a></div>
+        <div class="comments__item__children__wrap" v-if="comment.children">
+            <a href="" @click.prevent="(showChildren = !showChildren)" class="comments__item__children__show">
+                {{ showChildren ? 'Скрыть ветку' : 'Показать ветку' }}
+            </a>
+            <div class="comments__item__children"
+                :class="{'ml-20': depth <= 2}"
+                v-if="showChildren">
+                <comment v-for="comment in comment.children" :comment="comment" :depth="depth + 1"></comment>
+            </div>
+        </div>
     </div>
 </template>
 
 <script>
+import AddCommentForm from './add_comment_form.vue'
+
 export default {
     name: 'comment',
-    props: ['comment'],
+    props: ['comment', 'depth'],
+    components: {
+        AddCommentForm
+    },
     data: function(){
         return {
-            userWhantToShowComment: false
+            userWhantToShowComment: false,
+            showForm: false,
+            showChildren: true
         }
     },
     computed: {

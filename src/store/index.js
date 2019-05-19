@@ -20,7 +20,7 @@ const state = {
         {
             id: 2,
             parent_id: 1,
-            avatar: 'https://placeimg.com/64/64/people',
+            avatar: 'https://placeimg.com/64/64/nature',
             name: 'Петр Петрович',
             date: moment().subtract(2, "hours"),
             rating: 10,
@@ -28,12 +28,30 @@ const state = {
         },
         {
             id: 3,
-            parent_id: 0,
+            parent_id: 2,
             avatar: 'https://placeimg.com/64/64/people',
             name: 'Петр Петрович',
             date: moment().subtract(25, "minutes"),
             rating: 10,
-            text: 'текст комментария 2'
+            text: 'текст комментария 3'
+        },
+        {
+            id: 4,
+            parent_id: 3,
+            avatar: 'https://placeimg.com/64/64/people',
+            name: 'Петр Петрович',
+            date: moment().subtract(35, "minutes"),
+            rating: 10,
+            text: 'текст комментария 4'
+        },
+        {
+            id: 5,
+            parent_id: 4,
+            avatar: 'https://placeimg.com/64/64/people',
+            name: 'Петр Петрович',
+            date: moment().subtract(45, "minutes"),
+            rating: 10,
+            text: 'текст комментария 5'
         },
     ]
 }
@@ -42,7 +60,7 @@ export default new Vuex.Store({
     state,
     getters: {
         mappedComments: state => {
-            return state.comments.map( item => {
+                 return state.comments.map( item => {
                 return item
             })
         }

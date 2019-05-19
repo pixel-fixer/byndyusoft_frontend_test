@@ -42,8 +42,12 @@ h1
 .flex-push
     flex: 1 1 100%;
 
+.ml-20
+    margin-left 20px
+
 .ml-40
     margin-left 40px
+
 .mr-20
     margin-right 20px
 
@@ -85,4 +89,21 @@ h1
                 &.bad
                     background-color: #fff1f1
                     color: #cd192e
-    
+        &__children
+            margin-top 25px
+            &__show
+                cursor pointer
+                display block
+                text-align: right 
+                font-size: 12px;
+                padding: 2px 0;
+                &:hover
+                    background: #eeeeee;
+                    
+
+
+.form
+    &__group
+        margin-bottom: 100px
+    &__input
+        width: 100%
