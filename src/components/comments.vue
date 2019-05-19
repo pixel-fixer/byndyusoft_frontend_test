@@ -2,9 +2,13 @@
     <div class="comments content">
         <h2>Комментарии</h2>
         <div class="comment__list">
-            <comment v-for="comment in nestedTreeComments" :comment="comment" :depth="0" :key="comment.id"></comment>
-            <add-comment-form v-if="showForm" :parent-id="0"></add-comment-form>
-            <a v-else href="" @click.prevent="openForm">Написать комментарий</a>
+            <transition-group name="fade">
+                <comment v-for="comment in nestedTreeComments" :comment="comment" :depth="0" :key="comment.id"></comment>
+            </transition-group>
+            <transition name="fade">
+                <add-comment-form v-if="showForm" :parent-id="0" :key="1"></add-comment-form>
+                <a v-else href="" @click.prevent="openForm" :key="2">Написать комментарий</a>
+            </transition>
         </div>
     </div>
 </template>
@@ -29,7 +33,7 @@ export default {
     mounted () {
          EventBus.$on('CLOSE_ALL_FORMS', () => {
             this.showForm = false
-         });
+         }); 
          EventBus.$on('RERENDER_COMMENTS', () => {
              this.$forceUpdate()
              this.showForm = true;
@@ -41,7 +45,7 @@ export default {
         }
     },
     computed: {
-        ...mapGetters(['nestedTreeComments'])
+        ...mapGetters(['nestedTreeComments', 'mappedoneTwo'])
     },
     methods: {
        openForm(){

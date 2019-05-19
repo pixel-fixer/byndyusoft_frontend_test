@@ -33,27 +33,6 @@ h1
         color: #818181
         font-size: 15px
 
-.flex
-    display: flex
-
-.flex-center
-    align-items: center
-
-.flex-push
-    flex: 1 1 100%;
-
-.ml-20
-    margin-left 20px
-
-.ml-40
-    margin-left 40px
-
-.mr-20
-    margin-right 20px
-
-.no-wrap
-    white-space: nowrap
-
 .comments
     &__item
         margin-bottom 25px
@@ -79,6 +58,7 @@ h1
                 padding: 0 7px
                 cursor pointer
                 line-height: 20px
+                user-select: none
             &__rating
                 padding: 0 12px
                 color: #07a23b
@@ -100,7 +80,7 @@ h1
                 &:hover
                     background: #eeeeee;
                     
-button
+.button
     background-color: #4da0da
     cursor: pointer
     display: inline-flex
@@ -138,4 +118,6 @@ button
         &--textarea
             padding: 10px 15px
             line-height: normal
-    
+
+@import 'helpers'
+@import 'transitions'

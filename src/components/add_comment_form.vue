@@ -29,7 +29,7 @@
             </div>
             <div class="form__group">
                 <div class="form__group__col"></div>
-                <button type="submit">Добавить комментарий</button>
+                <button class="button" type="submit">Добавить комментарий</button>
             </div>
         </form>
     </div>
@@ -54,6 +54,9 @@ export default {
         submitComment(){
             this.$store.commit('addComment', Object.assign({}, this.comment))
             EventBus.$emit('RERENDER_COMMENTS');
+            this.$swal('Комментарий добавлен',
+                    '',
+                    'success')
             this.formReset()
         },
         formReset(){

@@ -22,7 +22,9 @@
                     <div class="comments__item__text" v-html="$options.filters.mdToHtml(comment.text)"></div>
                 </div>
             </div>
-            <add-comment-form v-if="showForm" :parent-id="comment.id" ></add-comment-form>
+            <transition name="fade">
+                <add-comment-form v-if="showForm" :parent-id="comment.id" ></add-comment-form>
+            </transition>
         </template>
         <div  v-else @click.prevent="userWhantToShowComment = true"><a href=""> Открыть комментарий</a></div>
         <div class="comments__item__children__wrap" v-if="comment.children">

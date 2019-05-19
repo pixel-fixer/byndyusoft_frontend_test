@@ -3,9 +3,12 @@ import App from './App.vue'
 import store from './store'
 import moment from 'moment'
 import { Markdown } from './services/markdown'
+import VueSwal from 'vue-swal'
 
 import "normalize.css"
 import './styles/main.styl'
+
+Vue.use(VueSwal)
 
 Vue.filter('formatDate', function(value) {
   if (value) {
@@ -18,13 +21,15 @@ Vue.filter('formatDate', function(value) {
  */
 Vue.filter('dateDiffFormat', function(value) {
   if (value) {
+    value = moment(value);
     let ms  = Math.abs( moment(value).diff(new Date()) )
-     if(ms <= 3600000){
-      return moment( value.diff(moment()) ).format('m') + ' минут назад'
+    if(ms <= 3600000){
+      const m = moment( value.diff(moment()) ).format('m');
+      return ( m == 0 ? 1 : m ) + ' минут назад'
     }else if( ms <= 86400000){
       return moment( value.diff(moment()) ).format('H') + ' часов назад'
     }else{
-      return (moment( moment().diff(value)).format('D') - 1) + ' дней назад'
+      return ( moment( moment().diff(value)).format('D') - 1 ) + ' дней назад'
     } 
   }
 })
