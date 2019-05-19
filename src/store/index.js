@@ -12,7 +12,6 @@ const debug = process.env.NODE_ENV !== 'production'
  */
 let setNestedArray = function(arr, parent){
     var out = []
-  
     var clonedArray = JSON.parse(JSON.stringify(arr)) //avoid state mutation side effect
     for(var i in clonedArray) {
         
@@ -48,7 +47,7 @@ export default new Vuex.Store({
                 name: 'Петр Петрович',
                 date: moment().subtract(2, "hours"),
                 rating: 10,
-                text: 'Commodo nostrud reprehenderit sint do excepteur laborum ea.'
+                text: '*Commodo nostrud reprehenderit sint do excepteur laborum ea.\n*Pariatur voluptate veniam consequat exercitation dolor qui aute ad Lorem.'
             },
             {
                 id: 3,
@@ -81,7 +80,6 @@ export default new Vuex.Store({
     },
     getters: {
         nestedTreeComments: state => {
-            //return state.comments;
             return setNestedArray(state.comments, 0)
         }
     },

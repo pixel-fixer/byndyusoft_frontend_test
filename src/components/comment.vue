@@ -15,7 +15,7 @@
                             <div class="comments__item__vote__action" @click="changeRaging(comment.id, 'sub')">&mdash;</div>                        
                         </div>
                         <div class="flex-push"></div>
-                        <a href="" @click.prevent="openForm">Ответить</a>
+                        <a href="" @click.prevent="openForm" class="comments__item__answer">Ответить</a>
                     </div>
                     <div class="comments__item__text" v-html="$options.filters.mdToHtml(comment.text)"></div>
                 </div>
@@ -24,10 +24,10 @@
                 <add-comment-form v-if="showForm" :parent-id="comment.id" ></add-comment-form>
             </transition>
         </template>
-        <div  v-else @click.prevent="userWhantToShowComment = true"><a href=""> Открыть комментарий</a></div>
+        <div  v-else @click.prevent="userWhantToShowComment = true"><a href="">Открыть комментарий</a></div>
         <div class="comments__item__children__wrap" v-if="comment.children">
             <a href="" @click.prevent="(showChildren = !showChildren)" class="comments__item__children__show">
-                {{ showChildren ? 'Скрыть ветку' : 'Показать ветку' }}
+                {{ showChildren ? 'Свернуть' : 'Показать' }}
             </a>
             <div class="comments__item__children"
                 :class="{'ml-20': depth <= 2}"

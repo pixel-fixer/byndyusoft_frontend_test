@@ -54,9 +54,7 @@ export default {
         submitComment(){
             this.$store.commit('addComment', Object.assign({}, this.comment))
             EventBus.$emit('RERENDER_COMMENTS');
-            this.$swal('Комментарий добавлен',
-                    '',
-                    'success')
+            this.$swal('Комментарий добавлен', '', 'success')
             this.formReset()
         },
         formReset(){
