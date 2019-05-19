@@ -51,7 +51,7 @@ export default {
     },
     methods: {
         submitComment(){
-            this.$store.commit('addComment', this.comment)
+            this.$store.commit('addComment', Object.assign({}, this.comment))
             this.formReset()
         },
         formReset(){

@@ -2,6 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import store from './store'
 import moment from 'moment'
+import { Markdown } from './services/markdown'
 
 import "normalize.css"
 import './styles/main.styl'
@@ -25,6 +26,14 @@ Vue.filter('dateDiffFormat', function(value) {
     }else{
       return (moment( moment().diff(value)).format('D') - 1) + ' дней назад'
     } 
+  }
+})
+
+Vue.filter('mdToHtml', function(value) {
+  if (value) {
+    let md = new Markdown()
+    console.log(md.parse(value));
+    return md.parse(value)
   }
 })
 

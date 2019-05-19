@@ -64,12 +64,12 @@ const state = {
         },
         {
             id: 5,
-            parent_id: 4,
+            parent_id: 0,
             avatar: 'https://placeimg.com/64/64/people',
             name: 'Петр Петрович',
             date: moment().subtract(45, "minutes"),
             rating: 10,
-            text: 'текст комментария 5'
+            text: 'текст комментария 5 aaa '
         },
     ]
 }
@@ -89,8 +89,8 @@ export default new Vuex.Store({
             }
         },
         addComment(state, comment){
-            console.log(state.comments)
-            comment.id = this.state.comments.length++
+            console.log(comment)
+            comment.id = this.state.comments.length+2
             comment.rating = 0
             comment.avatar = 'https://placeimg.com/64/64/people'
             comment.date = moment()

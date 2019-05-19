@@ -19,7 +19,7 @@
                         <div class="flex-push"></div>
                         <a href="" @click.prevent="showForm = true">Ответить</a>
                     </div>
-                    <div class="comments__item__text">{{comment.text}}</div>
+                    <div class="comments__item__text" v-html="$options.filters.mdToHtml(comment.text)"></div>
                 </div>
             </div>
             <add-comment-form v-if="showForm" :parent-id="comment.id"></add-comment-form>
