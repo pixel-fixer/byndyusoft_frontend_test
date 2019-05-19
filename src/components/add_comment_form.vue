@@ -36,6 +36,7 @@
 </template>
 
 <script>
+import EventBus from './../services/event-bus'
 export default {
     props: ['parentId'],
     name: 'add-comment-form',
@@ -52,6 +53,7 @@ export default {
     methods: {
         submitComment(){
             this.$store.commit('addComment', Object.assign({}, this.comment))
+            EventBus.$emit('RERENDER_COMMENTS');
             this.formReset()
         },
         formReset(){

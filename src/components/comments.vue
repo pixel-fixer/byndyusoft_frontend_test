@@ -30,6 +30,10 @@ export default {
          EventBus.$on('CLOSE_ALL_FORMS', () => {
             this.showForm = false
          });
+         EventBus.$on('RERENDER_COMMENTS', () => {
+             this.$forceUpdate()
+             this.showForm = true;
+         });
     },
     watch: {
         '$store.state.comments': function(){
