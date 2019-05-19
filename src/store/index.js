@@ -35,50 +35,49 @@ export default new Vuex.Store({
             {
                 id: 1,
                 parent_id: 0,
-                avatar: 'https://placeimg.com/64/64/people',
+                avatar: 'https://i.pravatar.cc/64?img=1',
                 name: 'Иван Иванович',
                 date: moment().subtract(6, "days"), 
                 rating: -2,
-                text: 'текст комментария 1222S'
+                text: 'Sint eiusmod minim irure do proident aliquip dolor tempor pariatur officia exercitation ullamco do.'
             },
             {
                 id: 2,
                 parent_id: 1,
-                avatar: 'https://placeimg.com/64/64/nature',
+                avatar: 'https://i.pravatar.cc/64?img=2',
                 name: 'Петр Петрович',
                 date: moment().subtract(2, "hours"),
                 rating: 10,
-                text: 'текст комментария 2'
+                text: 'Commodo nostrud reprehenderit sint do excepteur laborum ea.'
             },
             {
                 id: 3,
                 parent_id: 2,
-                avatar: 'https://placeimg.com/64/64/people',
+                avatar: 'https://i.pravatar.cc/64?img=3',
                 name: 'CoolNickName',
                 date: moment().subtract(25, "minutes"),
                 rating: 10,
-                text: 'текст комментария 3'
+                text: 'Ipsum sint incididunt consequat ullamco elit duis occaecat excepteur sunt cupidatat.'
             },
             {
                 id: 4,
                 parent_id: 3,
-                avatar: 'https://placeimg.com/64/64/people',
+                avatar: 'https://i.pravatar.cc/64?img=4',
                 name: 'Not So Cool Nick',
                 date: moment().subtract(35, "minutes"),
-                rating: 10,
-                text: 'текст комментария 4'
+                rating: -7,
+                text: 'Cupidatat in magna quis laborum proident voluptate irure voluptate qui voluptate.'
             },
             {
                 id: 5,
                 parent_id: 0,
-                avatar: 'https://placeimg.com/64/64/people',
+                avatar: 'https://i.pravatar.cc/64?img=5',
                 name: 'Билл Гейтс',
                 date: moment().subtract(45, "minutes"),
                 rating: 10,
-                text: 'текст комментария 5 aaa'
+                text: 'Esse magna irure nostrud ipsum dolore fugiat culpa officia veniam adipisicing elit.'
             },
-        ],
-        oneTwo: 1
+        ]
     },
     getters: {
         nestedTreeComments: state => {
@@ -96,15 +95,9 @@ export default new Vuex.Store({
         addComment(state, comment){
             comment.id = this.state.comments.length+2
             comment.rating = 0
-            comment.avatar = 'https://placeimg.com/64/64/people'
+            comment.avatar = 'https://i.pravatar.cc/64?img=' + comment.id
             comment.date = moment().endOf('minute')
             state.comments.push(comment)
         }
-    },
-    actions:{
-        /*addComment({commit}, comment) {
-            console.log('addComment')
-            commit('ADD_NEW_COMMENT', comment)
-        }*/
     }
 })

@@ -3,19 +3,17 @@
         <template v-if="showComment">
             <div class="flex">
                 <div class="comments__item__avatar">
-                    <img src="https://placeimg.com/64/64/people" alt="">
+                    <img :src="comment.avatar" alt="">
                 </div>
                 <div class="comments__item__content" >
                     <div class="comments__item__top-bar flex flex-center">
                         <div class="comments__item__name mr-20 no-wrap">{{ comment.name }}</div>
                         <div class="comments__item__date mr-20 no-wrap">{{ comment.date | dateDiffFormat }}</div>
-                        
                         <div class="comments__item__vote flex">
                             <div class="comments__item__vote__action" @click="changeRaging(comment.id, 'add')">+</div>
                             <div class="comments__item__vote__rating" :class="{'bad': comment.rating < 0}">{{comment.rating}}</div>
                             <div class="comments__item__vote__action" @click="changeRaging(comment.id, 'sub')">&mdash;</div>                        
                         </div>
-
                         <div class="flex-push"></div>
                         <a href="" @click.prevent="openForm">Ответить</a>
                     </div>
